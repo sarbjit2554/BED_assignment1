@@ -1,7 +1,10 @@
+// app.ts
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import sampleRoute from './routes/sampleRoute'; 
+import healthRoute from './routes/healthRoute';
+ 
 
 // Initialize Express app first
 const app = express();
@@ -25,8 +28,9 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 // Middleware to parse JSON in request bodies
 app.use(express.json());
 
-// Use the imported route (sampleRoute) for '/api' endpoint
-app.use('/api', sampleRoute);
+// Use the imported routes
+app.use('/api', sampleRoute);         // Use sample route at /api
+app.use('/api/v1', healthRoute);      // Use health route at /api/v1
 
 // Serve Swagger UI at '/api-docs' route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
