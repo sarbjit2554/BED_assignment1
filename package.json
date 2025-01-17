@@ -10,11 +10,17 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "ts-node src/server.ts",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint src",
     "test": "jest",
     "pretest": "npm run lint"
   },
-  "keywords": ["typescript", "express", "swagger", "jest", "eslint"],
+  "keywords": [
+    "typescript",
+    "express",
+    "swagger",
+    "jest",
+    "eslint"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -33,7 +39,7 @@
     "swagger-ui-express": "^5.0.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.7.3"
   },
   "dependencies": {
     "express": "^4.21.2"
