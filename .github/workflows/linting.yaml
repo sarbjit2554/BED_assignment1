@@ -1,4 +1,5 @@
 name: TypeScript Lint and Reviewdog
+
 on:
   pull_request:
     branches:
@@ -7,22 +8,32 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+
     steps:
       # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js
+      # Step 2: Cache Node.js modules (Optional for faster runs)
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      # Step 3: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "20.x"
 
-      # Step 3: Install ESLint and TypeScript plugins
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin typescript
 
-      # Step 4: Run ESLint with Reviewdog
+      # Step 5: Run ESLint with Reviewdog
       - name: Run ESLint with Reviewdog
         uses: reviewdog/action-eslint@v1
         with:
