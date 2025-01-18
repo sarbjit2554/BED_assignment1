@@ -1,7 +1,2 @@
-# Ignore the dist directory
+build/
 dist/
-
-
-
-# Ignore coverage directory
-coverage/
