@@ -4,7 +4,8 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import sampleRoute from './routes/sampleRoute'; 
 import healthRoute from './routes/healthRoute';
- 
+import { calculatePortfolioPerformance, calculateCompoundInterest, calculateInvestmentGrowth } from './Portfolio/portfolioPerformance';
+
 
 // Initialize Express app first
 const app = express();
@@ -31,6 +32,19 @@ app.use(express.json());
 // Use the imported routes
 app.use('/api', sampleRoute);         // Use sample route at /api
 app.use('/api/v1', healthRoute);      // Use health route at /api/v1
+app.get('/api/portfolio', (req, res) => {
+  console.log('Portfolio route hit'); // Log message to the console
+  const { initialInvestment, currentValue } = req.query;
+
+  // Assuming the portfolio performance function is imported and available
+  const result = calculatePortfolioPerformance(
+    Number(initialInvestment),
+    Number(currentValue)
+  );
+
+  res.json(result); // Respond with the result of the calculation
+});
+
 
 // Serve Swagger UI at '/api-docs' route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -42,3 +56,16 @@ app.get('/', (req, res) => {
 
 // Export the app for use elsewhere
 export default app;
+
+app.get('/api/portfolio', (req, res) => {
+  console.log('Portfolio route hit'); // Log message to the console
+  const { initialInvestment, currentValue } = req.query;
+
+  // Assuming the portfolio performance function is imported and available
+  const result = calculatePortfolioPerformance(
+    Number(initialInvestment),
+    Number(currentValue)
+  );
+
+  res.json(result); // Respond with the result of the calculation
+});

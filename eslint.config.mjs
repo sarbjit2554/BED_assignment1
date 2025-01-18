@@ -8,24 +8,27 @@ const { configs: tsConfigs } = tsPluginPkg;
 
 // Define basic ESLint configuration object
 const basicConfig = {
-    ignores: [
-        "dist/",
-        "coverage/",
-        ".github/",
-        "eslint.config.mjs",
-        "jest.config.ts",
-      ],
+  ignorePatterns: [
+    "dist/",
+    "coverage/",
+    ".github/",
+    "eslint.config.mjs",
+    "jest.config.ts",
+  ],
   extends: [
     eslintConfigs.recommended, // Base ESLint recommended config
+    "plugin:@typescript-eslint/recommended", // Extend TypeScript recommended rules
   ],
   parser: tsParser, // Use TypeScript parser
   parserOptions: {
     project: "./tsconfig.json", // Reference to tsconfig.json for type checking
   },
+  plugins: ["@typescript-eslint"], // Add TypeScript plugin for linting
   rules: {
-    // Add general ESLint rules here
-    "no-console": "warn",
-    "no-debugger": "warn",
+    "no-console": "warn", // Warn about console logs
+    "no-debugger": "warn", // Warn about debugger statements
+    "@typescript-eslint/no-explicit-any": "warn", // Optional rule for controlling `any` type usage
+    "@typescript-eslint/explicit-module-boundary-types": "warn", // Enforce type annotations for functions and methods
   },
 };
 
