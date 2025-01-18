@@ -31,6 +31,7 @@ app.use(express_1.default.json());
 // Use the imported routes
 app.use('/api', sampleRoute_1.default); // Use sample route at /api
 app.use('/api/v1', healthRoute_1.default); // Use health route at /api/v1
+// Correcting the repeated '/api/portfolio' route
 app.get('/api/portfolio', (req, res) => {
     console.log('Portfolio route hit'); // Log message to the console
     const { initialInvestment, currentValue } = req.query;
@@ -46,10 +47,3 @@ app.get('/', (req, res) => {
 });
 // Export the app for use elsewhere
 exports.default = app;
-app.get('/api/portfolio', (req, res) => {
-    console.log('Portfolio route hit'); // Log message to the console
-    const { initialInvestment, currentValue } = req.query;
-    // Assuming the portfolio performance function is imported and available
-    const result = (0, portfolioPerformance_1.calculatePortfolioPerformance)(Number(initialInvestment), Number(currentValue));
-    res.json(result); // Respond with the result of the calculation
-});
