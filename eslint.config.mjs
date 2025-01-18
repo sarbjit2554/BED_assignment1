@@ -8,13 +8,13 @@ const { configs: tsConfigs } = tsPluginPkg;
 
 // Define basic ESLint configuration object
 const basicConfig = {
-  ignores: [
-    "**/dist/*",
-    "**/coverage/*",
-    "**/.github/*",
-    "eslint.config.mjs",
-    "jest.config.ts",
-  ],
+    ignores: [
+        "dist/",
+        "coverage/",
+        ".github/",
+        "eslint.config.mjs",
+        "jest.config.ts",
+      ],
   extends: [
     eslintConfigs.recommended, // Base ESLint recommended config
   ],
